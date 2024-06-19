@@ -1,0 +1,168 @@
+/* idea callout 💡 */
+.callout[data-callout="idea"] {
+  --callout-color: 255, 255, 0;
+  --callout-icon: lucide-lightbulb;
+
+}
+
+/* QUOTE callout ✌️ */
+.callout[data-callout="quote"] {
+  --callout-padding: var(--size-4-3);
+  --icon-size: 70px;
+  max-width: 250px;
+}
+
+.callout[data-callout="quote"] .callout-title .callout-icon {
+  margin: 0 auto;
+}
+
+.callout[data-callout="quote"] .callout-title .callout-title-inner {
+  display: none;
+}
+
+.callout[data-callout="quote"] .callout-content {
+  padding-top: 20px;
+}
+
+.callout[data-callout="quote"] .callout-content p {
+  font-style: italic;
+  text-align: center;
+}
+
+.callout[data-callout="quote"] .callout-content p:first-child {
+  margin-top: 0;
+}
+
+.callout[data-callout="quote"] .callout-content p:last-child {
+  font-style: normal;
+  color: rgb(var(--ctp-yellow, 153, 122, 0));
+  text-align: right;
+  margin-bottom: 0;
+}
+
+/*------------------------------------------------------------------------------*/
+/*block callout ⬜️*/
+.callout[data-callout="block"] {
+  --callout-color: transparent;
+  border: none;
+  padding: 0;
+}
+
+.callout[data-callout="block"] .callout-title {
+  display: none;
+  padding: 0;
+}
+
+.callout[data-callout="block"] .callout-content {
+  font-size: 100%;
+  padding: 16px;
+}
+
+.callout[data-callout-metadata*="c"] {
+  text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+  .callout[data-callout-metadata*="green"] .callout-content {
+    background-color: rgba(129, 255, 173, 0.12);
+    border-radius: 8px;
+  }
+}
+
+.callout[data-callout-metadata*="green"] .callout-content {
+  background-color: rgba(0, 255, 90, 0.1);
+  border-radius: 8px;
+
+}
+
+/*------------------------------------------------------------------------------------------------*/
+/*tabed callout*/
+[data-callout="tabbed"] {
+  outline: 1px solid var(--color-base-30);
+  border-radius: 0.5rem;
+}
+
+[data-callout="tabbed"]>.callout-content {
+  padding: 0.25rem;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(5rem, max-content));
+  gap: 0 1rem;
+}
+
+[data-callout="tabbed"]>.callout-title {
+  display: none;
+}
+
+[data-callout="tabbed"]>.callout-content p {
+  margin: 0;
+}
+
+[data-callout="tabbed"]>.callout-content label>input {
+  display: none;
+}
+
+[data-callout="tabbed"]>.callout-content label {
+  width: 100%;
+  display: inline-block;
+  padding: 0.15rem 0.75ch;
+  border-radius: 1rem;
+
+  color: #ccc;
+  background-color: #2e7d32;
+
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.15rem;
+  cursor: pointer;
+}
+
+[data-callout="tabbed"]>.callout-content label:has(input:checked) {
+  color: white;
+  background-color: #8bc34a;
+}
+
+[data-callout="tabbed"]>.callout-content p:not(:has(label input:checked))+blockquote {
+  display: none;
+}
+
+[data-callout="tabbed"]>.callout-content>blockquote {
+  order: 999;
+  grid-column: 1 / -1;
+
+  background-color: transparent;
+  padding-left: 0;
+  border: 0;
+}
+
+/*--------------------------------------------------------------------------------------------------------*/
+/*side note callout*/
+
+/* aside functionality as a custom callout */
+:is(.markdown-source-view .cm-callout, div:not([class])):has(> .callout[data-callout-metadata*="aside"]) {
+  position: relative;
+  overflow: visible;
+  contain: none !important;
+}
+
+.callout[data-callout-metadata*="aside"] {
+  --aside-width: 200px;
+  --aside-offset: var(--size-4-4);
+  position: absolute;
+}
+
+.callout[data-callout-metadata*="aside-l"] {
+  left: calc(-1 * (var(--aside-width) + var(--aside-offset)));
+  right: calc(100% + var(--aside-offset));
+}
+
+.callout[data-callout-metadata*="aside-r"] {
+  left: calc(100% + var(--aside-offset));
+  right: calc(-1 * (var(--aside-width) + var(--aside-offset)));
+}
+
+@media (hover: hover) {
+  .markdown-source-view.mod-cm6 .cm-embed-block:has(> div > [data-callout-metadata*="aside"]):hover {
+    overflow: visible;
+  }
+}
